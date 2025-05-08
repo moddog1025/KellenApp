@@ -1,0 +1,490 @@
+[gd_scene load_steps=14 format=3 uid="uid://pwf6kcrkqfoi"]
+
+[ext_resource type="FontFile" uid="uid://c5hqk72qwci1b" path="res://Assets/Fonts/222-03.regular.ttf" id="1_ox4v7"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/start_menu.gd" id="1_xcjru"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/Lobby Menu/lobby_menu.gd" id="2_o2ql1"]
+[ext_resource type="ButtonGroup" uid="uid://dkdt2ytoagb88" path="res://Scripts/UI/Menus/Lobby Menu/lobby_tabs_group.tres" id="3_s8v3o"]
+[ext_resource type="Script" path="res://Scenes/UI/Menus/settings_menu.gd" id="5_66b2x"]
+[ext_resource type="ButtonGroup" uid="uid://ddhnbdwyuw67b" path="res://Scripts/UI/Menus/Lobby Menu/settings_tab_group.tres" id="5_kchr5"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/Settings Menu/gameplay_tab.gd" id="7_5jcp1"]
+[ext_resource type="PackedScene" uid="uid://cgsjy8yqjomuf" path="res://Scenes/UI/Menus/keybinds_mapping_button.tscn" id="7_mc3p1"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/Settings Menu/keybinds_tab.gd" id="7_pr2gf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ibgc"]
+bg_color = Color(1, 0.807843, 0.345098, 1)
+
+[sub_resource type="Theme" id="Theme_tj3qm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ed0lk"]
+bg_color = Color(0.199401, 0.621702, 0.968695, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yl5e"]
+bg_color = Color(0.615275, 0.815319, 0.934818, 1)
+
+[node name="Start Menu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_menu", "settings_menu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xcjru")
+main_menu = NodePath("Main Menu")
+lobby_menu = NodePath("Lobby Menu")
+settings_menu = NodePath("Settings Menu")
+
+[node name="Main Menu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main Menu Panel" type="Panel" parent="Main Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ibgc")
+
+[node name="Title Text" type="RichTextLabel" parent="Main Menu/Main Menu Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -730.0
+offset_top = -253.0
+offset_right = 714.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_ox4v7")
+theme_override_font_sizes/normal_font_size = 150
+text = "Dummy Protocol"
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu/Main Menu Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 150
+
+[node name="Start Button" type="Button" parent="Main Menu/Main Menu Panel/MarginContainer"]
+custom_minimum_size = Vector2(300, 85)
+layout_mode = 2
+theme = SubResource("Theme_tj3qm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("1_ox4v7")
+theme_override_font_sizes/font_size = 65
+text = "Start"
+flat = true
+
+[node name="Lobby Menu" type="Control" parent="." node_paths=PackedStringArray("play_tab_button", "play_tab", "loadout_tab", "drip_tab", "career_tab", "store_tab")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_o2ql1")
+play_tab_button = NodePath("VSplitContainer/Menu Bar/Play Tab Button")
+play_tab = NodePath("VSplitContainer/Current Tab/Play Tab")
+loadout_tab = NodePath("VSplitContainer/Current Tab/Loadout Tab")
+drip_tab = NodePath("VSplitContainer/Current Tab/Drip Tab")
+career_tab = NodePath("VSplitContainer/Current Tab/Career Tab")
+store_tab = NodePath("VSplitContainer/Current Tab/Store Tab")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Lobby Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 80
+dragger_visibility = 2
+
+[node name="Menu Bar" type="Panel" parent="Lobby Menu/VSplitContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ed0lk")
+
+[node name="Play Tab Button" type="Button" parent="Lobby Menu/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+toggle_mode = true
+button_group = ExtResource("3_s8v3o")
+text = "Play"
+
+[node name="Loadout Tab Button" type="Button" parent="Lobby Menu/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 610.0
+offset_right = 810.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("3_s8v3o")
+text = "Loadout"
+
+[node name="Drip Tab Button" type="Button" parent="Lobby Menu/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 410.0
+offset_right = 610.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("3_s8v3o")
+text = "Drip"
+
+[node name="Career Tab Button" type="Button" parent="Lobby Menu/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 1110.0
+offset_right = 1310.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("3_s8v3o")
+text = "Career"
+
+[node name="Store Tab Button" type="Button" parent="Lobby Menu/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 1310.0
+offset_right = 1510.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("3_s8v3o")
+text = "Store"
+
+[node name="Current Tab" type="Control" parent="Lobby Menu/VSplitContainer"]
+layout_mode = 2
+
+[node name="Play Tab" type="Panel" parent="Lobby Menu/VSplitContainer/Current Tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3yl5e")
+
+[node name="Ready Button" type="Button" parent="Lobby Menu/VSplitContainer/Current Tab/Play Tab"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 0
+offset_left = 59.0
+offset_top = 846.0
+offset_right = 359.0
+offset_bottom = 946.0
+theme_override_font_sizes/font_size = 55
+text = "Ready"
+
+[node name="Settings Button" type="Button" parent="Lobby Menu/VSplitContainer/Current Tab/Play Tab"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 1782.0
+offset_top = 893.0
+offset_right = 1832.0
+offset_bottom = 943.0
+theme_override_font_sizes/font_size = 30
+text = "S
+"
+
+[node name="Social Button" type="Button" parent="Lobby Menu/VSplitContainer/Current Tab/Play Tab"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 1546.0
+offset_top = 889.0
+offset_right = 1596.0
+offset_bottom = 939.0
+theme_override_font_sizes/font_size = 30
+text = "S
+"
+
+[node name="Loadout Tab" type="Panel" parent="Lobby Menu/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Drip Tab" type="Panel" parent="Lobby Menu/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Career Tab" type="Panel" parent="Lobby Menu/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Store Tab" type="Panel" parent="Lobby Menu/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Settings Menu" type="Control" parent="." node_paths=PackedStringArray("gameplay_tab_button", "gameplay_tab", "video_tab", "audio_tab", "keybinds_tab")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_66b2x")
+gameplay_tab_button = NodePath("ColorRect/VSplitContainer/Menu Bar/Gameplay Tab Button")
+gameplay_tab = NodePath("ColorRect/VSplitContainer/Current Tab/Gameplay Tab")
+video_tab = NodePath("ColorRect/VSplitContainer/Current Tab/Video Tab")
+audio_tab = NodePath("ColorRect/VSplitContainer/Current Tab/Audio Tab")
+keybinds_tab = NodePath("ColorRect/VSplitContainer/Current Tab/Keybinds Tab")
+
+[node name="ColorRect" type="ColorRect" parent="Settings Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Settings Menu/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 80
+dragger_visibility = 2
+
+[node name="Menu Bar" type="Panel" parent="Settings Menu/ColorRect/VSplitContainer"]
+layout_mode = 2
+
+[node name="Video Tab Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 760.0
+offset_right = 960.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("5_kchr5")
+text = "Visual
+"
+
+[node name="Gameplay Tab Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 560.0
+offset_right = 760.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("5_kchr5")
+text = "Gameplay
+"
+
+[node name="Audio Tab Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 960.0
+offset_right = 1160.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("5_kchr5")
+text = "Audio
+"
+
+[node name="Keybinds Tab Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 0
+offset_left = 1160.0
+offset_right = 1360.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+button_group = ExtResource("5_kchr5")
+text = "Keybinds
+"
+
+[node name="Exit Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Menu Bar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 1840.0
+offset_right = 1920.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 50
+text = "X"
+
+[node name="Current Tab" type="Control" parent="Settings Menu/ColorRect/VSplitContainer"]
+layout_mode = 2
+
+[node name="Video Tab" type="PanelContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Video Tab"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Video Tab/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Video Tab/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Video Tab/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Gameplay Tab" type="PanelContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab" node_paths=PackedStringArray("v_sens_slider", "v_sens_input")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_5jcp1")
+v_sens_slider = NodePath("MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens/Vert Sens Slider")
+v_sens_input = NodePath("MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens/Vert Sens Input Box")
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Setting List" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List"]
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+
+[node name="Vertical Sens" type="HBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Vertical Sensitivity"
+
+[node name="Spacer" type="Control" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Vert Sens Slider" type="HSlider" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Spacer2" type="Control" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Vert Sens Input Box" type="LineEdit" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens"]
+custom_minimum_size = Vector2(60, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "0.5"
+alignment = 1
+
+[node name="Audio Tab" type="PanelContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 0
+
+[node name="Keybinds Tab" type="PanelContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_pr2gf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Action List" type="VBoxContainer" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Input Button" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer/VBoxContainer/ScrollContainer/Action List" instance=ExtResource("7_mc3p1")]
+layout_mode = 2
+
+[node name="Reset Button" type="Button" parent="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 40
+text = "Reset to Default"
+
+[connection signal="pressed" from="Main Menu/Main Menu Panel/MarginContainer/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Lobby Menu/VSplitContainer/Menu Bar/Play Tab Button" to="Lobby Menu" method="_on_play_tab_pressed"]
+[connection signal="pressed" from="Lobby Menu/VSplitContainer/Menu Bar/Loadout Tab Button" to="Lobby Menu" method="_on_loadout_tab_pressed"]
+[connection signal="pressed" from="Lobby Menu/VSplitContainer/Current Tab/Play Tab/Settings Button" to="." method="_on_settings_button_pressed"]
+[connection signal="close_settings" from="Settings Menu" to="." method="_on_settings_menu_close_settings"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Menu Bar/Video Tab Button" to="Settings Menu" method="_on_video_tab_button_pressed"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Menu Bar/Gameplay Tab Button" to="Settings Menu" method="_on_gameplay_tab_button_pressed"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Menu Bar/Audio Tab Button" to="Settings Menu" method="_on_audio_tab_button_pressed"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Menu Bar/Keybinds Tab Button" to="Settings Menu" method="_on_keybinds_tab_button_pressed"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Menu Bar/Exit Button" to="Settings Menu" method="_on_exit_pressed"]
+[connection signal="value_changed" from="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens/Vert Sens Slider" to="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab" method="_on_vert_sens_slider_value_changed"]
+[connection signal="text_changed" from="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab/MarginContainer/VBoxContainer/ScrollContainer/Setting List/MarginContainer/Vertical Sens/Vert Sens Input Box" to="Settings Menu/ColorRect/VSplitContainer/Current Tab/Gameplay Tab" method="_on_vert_sens_input_box_text_changed"]
+[connection signal="pressed" from="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab/MarginContainer/VBoxContainer/Reset Button" to="Settings Menu/ColorRect/VSplitContainer/Current Tab/Keybinds Tab" method="_on_reset_button_pressed"]

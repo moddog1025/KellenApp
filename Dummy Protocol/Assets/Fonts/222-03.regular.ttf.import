@@ -1,0 +1,38 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://c5hqk72qwci1b"
+path="res://.godot/imported/222-03.regular.ttf-9ed6845e1c5f929aebc3f3c800416614.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/222-03.regular.ttf"
+dest_files=["res://.godot/imported/222-03.regular.ttf-9ed6845e1c5f929aebc3f3c800416614.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
+language_support={}
+script_support={}
+opentype_features={}
