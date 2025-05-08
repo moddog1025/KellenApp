@@ -1,0 +1,21 @@
+{
+
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.egg-info": true,
+      "**/.venv": true,
+      "**/.vscode": false,
+    },
+    "search.exclude": {
+      "**/__pycache__": true,
+      "**/*.egg-info": true
+    },
+    "explorer.excludeGitIgnore": false,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "terminal.integrated.env.windows": {
+      "VIRTUAL_ENV": "${workspaceFolder}\\.venv",
+      "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}"
+    }
+    
+  }
+  
