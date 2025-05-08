@@ -10,37 +10,35 @@ class ToolBar(QFrame):
         self.setObjectName("toolbar")
         self.setStyleSheet("""
         QFrame#toolbar {
-            background-color: #FFFFFF;
+            background: transparent;
         }
         QPushButton {
             background: none;
             border: none;
             font: 14px "Segoe UI";
-            color: #0078D4;
+            color: #333333;
         }
         QPushButton:hover {
             text-decoration: underline;
         }
         QLabel {
-            font: 14px "Segoe UI";
-            color: #333333;
+            font: 16px "Segoe UI";
+            color: #222222;
         }
         """)
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(16, 8, 16, 8)
-        layout.setSpacing(8)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
 
         if back:
             self.back_btn = QPushButton("← Back")
             self.back_btn.setCursor(Qt.CursorShape.PointingHandCursor)
             layout.addWidget(self.back_btn)
-        else:
-            layout.addSpacing(80)
 
+        layout.addStretch()
         if title:
             lbl = QLabel(title)
-            lbl.setFont(QFont("Segoe UI", 14, QFont.Weight.Bold))
+            lbl.setFont(QFont("Segoe UI", 16, QFont.Weight.Bold))
             lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            layout.addWidget(lbl, stretch=1)
-
+            layout.addWidget(lbl)
         layout.addStretch()

@@ -8,20 +8,21 @@ from app.gui.widgets import CardWidget
 class ImagePostWidget(CardWidget):
     clicked = pyqtSignal()
 
-    def __init__(self, image_path: str):
-        super().__init__()
+    def __init__(self, image_path: str, border_color: str = "#FFFFFF"):
+        super().__init__(border_color=border_color)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
+
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
         layout.setSpacing(8)
 
-        pixmap = QPixmap(image_path)
-        if not pixmap.isNull():
-            pixmap = pixmap.scaledToWidth(360, Qt.TransformationMode.SmoothTransformation)
-        img_label = QLabel()
-        img_label.setPixmap(pixmap)
-        img_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(img_label)
+        pix = QPixmap(image_path)
+        pix = pix.scaledToWidth(360, Qt.TransformationMode.SmoothTransformation)
+
+        img_lbl = QLabel()
+        img_lbl.setPixmap(pix)
+        img_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(img_lbl)
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:

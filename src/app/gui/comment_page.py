@@ -2,29 +2,33 @@
 
 import random
 import string
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea
 from PyQt6.QtCore import pyqtSignal
 from app.gui.tool_bar import ToolBar
 from app.posts.comment import CommentWidget
+from random import randint
+from app.gui.main_feed import _COMMENT_SAMPLES
+
+# alternating border‑colors for comments
+_COMMENT_COLORS = ["#8EBDC4", "#C4F0F0"]
 
 class CommentPageWidget(QWidget):
     back_clicked = pyqtSignal()
 
     def __init__(self):
         super().__init__()
+        self.setStyleSheet("background-color: #92DCE5;")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
 
-        # Top bar with Back button
         toolbar = ToolBar(self, title="Comments", back=True)
         toolbar.back_btn.clicked.connect(self.back_clicked.emit)
         layout.addWidget(toolbar)
 
-        # Scrollable comments list
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setFrameShape(QScrollArea.Shape.NoFrame)
         layout.addWidget(scroll)
 
         container = QWidget()
@@ -32,12 +36,11 @@ class CommentPageWidget(QWidget):
         vbox.setContentsMargins(16, 16, 16, 16)
         vbox.setSpacing(12)
 
-        # Random mock comments
-        num_comments = random.randint(1, 5)
-        for i in range(num_comments):
-            uname = "@" + "".join(random.choices(string.ascii_lowercase, k=6))
-            text = f"Mock comment {i+1}: Lorem ipsum dolor sit amet."
-            comment = CommentWidget(text, uname)
+        for i in range(randint(0, 8)):
+            user = "@" + "".join(random.choices(string.ascii_lowercase, k=6))
+            text = random.choice(_COMMENT_SAMPLES)
+            color = _COMMENT_COLORS[i % len(_COMMENT_COLORS)]
+            comment = CommentWidget(text, user, border_color=color)
             vbox.addWidget(comment)
 
         vbox.addStretch()
